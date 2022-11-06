@@ -9,9 +9,10 @@ export const GlobalStyles = createGlobalStyle`
   }
   html {
     width: 1440px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   html, body, div#root {
-    height: 100%;
+    height: auto;
   }
   body {
     background: #f6f7f8;
