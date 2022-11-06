@@ -65,7 +65,7 @@ const TrendChart = ({ data }: { data: IFilterData }) => {
         containerComponent={<VictoryVoronoiContainer />}
       >
         {/* 가로 Axis */}
-        <VictoryAxis tickFormat={t => `${dayjs(t).format('M월 DD일')}`} />
+        <VictoryAxis tickFormat={t => `${dayjs(t).format('M월 D일')}`} />
         {/* 세로 Axis */}
         <VictoryAxis dependentAxis tickCount={6} tickFormat={t => `${ChartFormatter(t)}`} />
         {Object.keys(data).map((obj, index) => (

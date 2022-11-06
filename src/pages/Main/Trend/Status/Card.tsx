@@ -1,5 +1,6 @@
 import { DiffTypeValue } from 'utils/mainUtils';
-import { AiFillCaretUp, AiFillCaretDown } from 'react-icons/ai';
+import { ReactComponent as ArrowFillUp } from 'assets/ArrowFillUp.svg';
+import { ReactComponent as ArrowFillDown } from 'assets/ArrowFillDown.svg';
 import { CardArticle } from 'pages/Main/styles';
 
 const Card = ({ title, data: { value, variance } }: { title: string; data: DiffTypeValue }) => {
@@ -13,13 +14,7 @@ const Card = ({ title, data: { value, variance } }: { title: string; data: DiffT
   }[title];
 
   const TriangleIcon =
-    variance === '0' ? (
-      <></>
-    ) : variance.includes('-') ? (
-      <AiFillCaretDown color="#85da47" size={12} />
-    ) : (
-      <AiFillCaretUp color="#ff0000" />
-    );
+    variance === '0' ? <></> : variance.includes('-') ? <ArrowFillUp /> : <ArrowFillDown />;
 
   return (
     <CardArticle>
@@ -29,7 +24,7 @@ const Card = ({ title, data: { value, variance } }: { title: string; data: DiffT
           {value} {suffix}
         </h3>
         <div>
-          <span>{TriangleIcon}</span>
+          <span className="triangle_icon">{TriangleIcon}</span>
           <span>
             {variance.replace('-', '')} {suffix}
           </span>

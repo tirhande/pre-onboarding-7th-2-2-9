@@ -37,7 +37,7 @@ export const DateDiv = styled.div`
   }
 `;
 
-// Trend
+// Trend / Media
 export const SubSection = styled.section`
   height: 743px;
   padding: 20px 40px;
@@ -87,6 +87,9 @@ export const CardArticle = styled.article`
   span {
     font-size: 12px;
     color: #94a2ad;
+  }
+  span.triangle_icon {
+    margin-right: 5px;
   }
   h3 {
     font-size: 16px;
