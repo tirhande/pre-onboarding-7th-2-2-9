@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import instance from 'apis/axiosInstance';
 import dayjs, { Dayjs } from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(isBetween);
@@ -55,7 +55,6 @@ const initialState: SliceState = {
   },
   mediaDatas: [],
 };
-
 export const getTrendDatas = createAsyncThunk(
   'get/trend_data',
   async ({ startDate, endDate }: IDate, thunkAPI) => {
@@ -63,14 +62,14 @@ export const getTrendDatas = createAsyncThunk(
       data: {
         report: { daily },
       },
-    } = await axios.get('/server/wanted_FE_trend-data-set.json');
+    } = await instance.get('/server/wanted_FE_trend-data-set.json');
     return daily;
   }
 );
 export const getMediaDatas = createAsyncThunk(
   'get/media_data',
   async ({ sDate, eDate }: { sDate: Dayjs; eDate: Dayjs }, thunkAPI) => {
-    const mediaResp = await axios.get('/server/wanted_FE-media-channel-data-set.json');
+    const mediaResp = await instance.get('/server/wanted_FE-media-channel-data-set.json');
     const mediaData = mediaResp.data.filter((obj: IMediaData) =>
       dayjs(obj.date).isBetween(sDate, eDate, 'day', '[]')
     );

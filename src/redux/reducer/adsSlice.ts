@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import instance from 'apis/axiosInstance';
 
 export type SliceState = {
   adItems: IAdItems[];
@@ -20,20 +20,6 @@ export interface IAdItems {
     roas: number;
   };
 }
-// {
-//   "id": 1,
-//   "adType": "web",
-//   "title": "매드업 레버 광고 1234",
-//   "budget": 500000,
-//   "status": "active",
-//   "startDate": "2020-10-19T00:00:00",
-//   "endDate": null,
-//   "report": {
-//     "cost": 267144117,
-//     "convValue": 1157942685,
-//     "roas": 433
-//   }
-// },
 const initialState: SliceState = {
   adItems: [],
   status: 'all',
@@ -42,7 +28,7 @@ const initialState: SliceState = {
 export const getAdDatas = createAsyncThunk('get/ad_data', async () => {
   const {
     data: { ads },
-  } = await axios.get('/server/wanted_FE_ad-list-data-set.json');
+  } = await instance.get('/server/wanted_FE_ad-list-data-set.json');
   return ads;
 });
 
