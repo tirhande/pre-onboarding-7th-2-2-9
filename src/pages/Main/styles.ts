@@ -135,6 +135,7 @@ export const FilterArticle = styled.article`
     float: right;
 
     select {
+      width: 60px;
       border: none;
       padding-left: 0;
       padding-right: 10px;

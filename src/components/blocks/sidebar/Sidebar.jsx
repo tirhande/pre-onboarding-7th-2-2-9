@@ -62,7 +62,7 @@ const Sidebar = () => {
       </GuideDiv>
       <TermsDiv>
         <p>레버는 함께 만들어갑니다.</p>
-        <p>이용약관</p>
+        <p onClick={() => alert('준비중입니다.')}>이용약관</p>
       </TermsDiv>
     </ASide>
   );
@@ -194,6 +194,7 @@ const TermsDiv = styled.div`
   p:last-child {
     margin-top: 10px;
     text-decoration: underline;
+    cursor: pointer;
   }
 `;
 export default Sidebar;

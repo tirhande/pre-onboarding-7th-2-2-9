@@ -8,8 +8,8 @@ const StyledSelect = ({
   name,
 }: {
   children: ReactNode;
-  onChange: ChangeEventHandler<HTMLSelectElement>;
-  defaultValue: string;
+  onChange?: ChangeEventHandler<HTMLSelectElement>;
+  defaultValue?: string;
   name?: string;
 }) => {
   return (

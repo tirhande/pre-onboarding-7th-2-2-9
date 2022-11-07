@@ -45,10 +45,10 @@ const TrendFilter = ({
         </StyledSelect>
       </div>
       <div className="week_select">
-        <select>
+        <StyledSelect>
           <option>주간</option>
           <option>일간</option>
-        </select>
+        </StyledSelect>
       </div>
     </FilterArticle>
   );
