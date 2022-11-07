@@ -1,36 +1,22 @@
-import styled from 'styled-components';
+import useMediaData from 'hooks/useMediaData';
+import { MediaContents, SubHeader, SubSection } from '../styles';
+import Chart from './Chart';
+import Statistics from './Statistics';
 
 const Media = () => {
+  const { chartMedia, mergeData } = useMediaData();
+
   return (
-    <Section>
+    <SubSection>
       <SubHeader>
         <h2>매체 현황</h2>
       </SubHeader>
-      <Contents></Contents>
-    </Section>
+      <MediaContents>
+        <Chart chartMedia={chartMedia} />
+        <Statistics mergeData={mergeData} />
+      </MediaContents>
+    </SubSection>
   );
 };
 
-const Section = styled.section`
-  height: 743px;
-
-  padding: 20px 40px;
-  // background: #c2defd;
-`;
-
-const SubHeader = styled.header`
-  width: 100%;
-  height: 20px;
-  color: #3a474e;
-  font-weight: bold;
-  line-height: 20px;
-  margin-bottom: 20px;
-`;
-const Contents = styled.article`
-  height: 654px;
-  padding: 40px;
-
-  background: #fff;
-  border-radius: 20px;
-`;
 export default Media;

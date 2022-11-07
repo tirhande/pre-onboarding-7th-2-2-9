@@ -56,7 +56,7 @@ pre-onboarding-7th-2-2-9 % npm build
 
 <!-- [🖍 3차 토의결과](https://github.com/Wanted-07-team-9/pre-onboarding-7th-2-1-9/discussions/8) -->
 
-<!-- [🥇 선정 결과](https://github.com/Wanted-07-team-9/pre-onboarding-7th-2-1-9/pull/23#issue-1435416747) -->
+[🥇 선정 결과](https://github.com/Wanted-07-team-9/pre-onboarding-7th-2-2-9/pull/15)
 
 ## **📝 디렉토리 구조**
 
@@ -153,8 +153,10 @@ const Trend = () => {
 - 매체현황은 구현 X
 
 ```diff
-@@ 미구현 @@
++ 날짜 선택에 따라 데이터 변경 적용
 ```
+
+<img width="1081" alt="statistics" src="https://user-images.githubusercontent.com/74575497/200299692-bcdd1d20-626a-4869-98c3-07d42dc7cae7.png">
 
 ### **3️⃣ Assignment**
 
@@ -248,16 +250,20 @@ instance.interceptors.response.use(
 
 ## **코딩 컨벤션**
 
-- 컴포넌트의 ID사용은 지양한다.
-- react의 state는 여러개 사용시 최소 집합을 찾아 사용한다.
-- 컴포넌트의 이벤트에서 불필요한 익명함수를 사용하지 않는다. (예시: 함수의 인자가 event 하나인 경우)
-- 코드를 설명하는 주석은 가급적 사용하지 않는다.
-- 상수는 영문 대문자 스네이크 표기법(Snake case)를 사용한다.(예시: SYMBOLIC_CONSTANTS)
-- 반환 값이 불린인 함수는 'is'로 시작한다
-- const와 let은 사용 시점에 선언 및 할당한다.
-- 함수는 사용 전에 선언해야 하며, 함수 선언문은 변수 선언문 다음에 오도록 한다.
-- 이벤트 핸들러는 'on'으로 시작한다.
-- 한 줄짜리 블록일 경우라도 {}를 생략하지 않으며 명확히 줄 바꿈 하여 사용한다.
+> - 컴포넌트의 ID사용은 지양한다.
+> - react의 state는 여러개 사용시 최소 집합을 찾아 사용한다.
+> - 컴포넌트의 이벤트에서 불필요한 익명함수를 사용하지 않는다. (예시: 함수의 인자가 event 하나인 경우)
+> - 코드를 설명하는 주석은 가급적 사용하지 않는다.
+> - 상수는 영문 대문자 스네이크 표기법(Snake case)를 사용한다.(예시: SYMBOLIC_CONSTANTS)
+> - 반환 값이 불린인 변수는 'is'로 시작한다
+> - 반환 값의 유무를 사용하는 변수는 has로 시작한다
+>   > -`예시. loading -> isLoading / Error -> hasError`
+> - const와 let은 사용 시점에 선언 및 할당한다.
+> - 함수는 사용 전에 선언해야 하며, 함수 선언문은 변수 선언문 다음에 오도록 한다.
+> - 이벤트 핸들러는 'on'으로 시작한다.
+> - 한 줄짜리 블록일 경우라도 {}를 생략하지 않으며 명확히 줄 바꿈 하여 사용한다.
+>   > ` 한 줄짜리 블록일 경우 {}를 생략할 수 있지만, 이는 코드 구조를 애매하게 만든다. 당장은 두 줄을 줄일 수 있겠지만 이후 오류 발생 확률이 높아 잠재된 위험 요소가 된다.` >> `단, map과 같은 화살표 함수의 암시적 반환은 허용한다. `
+> - API 인스턴스를 만드는 함수는 API/axiosInstance.js 파일내에서 axiosInstance 라는 이름으로 통일한다
 
 </div>
 </details>

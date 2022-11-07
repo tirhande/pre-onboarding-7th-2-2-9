@@ -39,8 +39,8 @@ export const DateDiv = styled.div`
 
 // Trend / Media
 export const SubSection = styled.section`
-  height: 743px;
-  padding: 20px 40px;
+  margin: 20px 0;
+  padding: 0 40px;
 `;
 
 export const SubHeader = styled.header`
@@ -159,4 +159,64 @@ export const IconSpan = styled.span`
 
 export const ChartArticle = styled.article`
   height: 276px;
+`;
+
+// Media
+export const MediaContents = styled.article`
+  background: #fff;
+  border-radius: 20px;
+
+  padding: 33px 40px 40px 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+export const MediaChartDiv = styled.div`
+  height: 328px;
+`;
+export const StatisticsDiv = styled.div`
+  max-width: 960px;
+  overflow-x: auto;
+
+  .stat_table {
+    display: table;
+    width: 1320px;
+    border-collapse: collapse;
+    margin-top: 80px;
+
+    > div:first-child {
+      border-top: 1px solid #edeff1;
+    }
+    > div {
+      display: table-row;
+      height: 40px;
+      line-height: 40px;
+
+      border-bottom: 1px solid #edeff1;
+
+      > div {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: right;
+        font-size: 12px;
+
+        width: 110px;
+      }
+      .stat_title {
+        font-size: 12px;
+        color: #94a2ad;
+      }
+      .stat_company {
+        text-align: left;
+      }
+      .stat_value {
+        font-size: 12px;
+      }
+    }
+
+    .stat_total {
+      color: #586cf5;
+    }
+  }
 `;

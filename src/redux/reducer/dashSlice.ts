@@ -61,7 +61,10 @@ export const getTrendDatas = createAsyncThunk('get/trend_data', async () => {
       report: { daily },
     },
   } = await instance.get('/server/wanted_FE_trend-data-set.json');
-  return daily;
+
+  const { data } = await instance.get('/server/wanted_FE-media-channel-data-set.json');
+
+  return { daily, data };
 });
 export const getMediaDatas = createAsyncThunk('get/media_data', async () => {
   const { data } = await instance.get('/server/wanted_FE-media-channel-data-set.json');
@@ -82,7 +85,8 @@ export const DashSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(getTrendDatas.fulfilled, (state, action) => {
-      state.trendDatas = action.payload;
+      state.trendDatas = action.payload.daily;
+      state.mediaDatas = action.payload.data;
     });
     builder.addCase(getMediaDatas.fulfilled, (state, action) => {
       state.mediaDatas = action.payload;

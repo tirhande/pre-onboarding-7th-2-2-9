@@ -39,7 +39,6 @@ const RangeDatePicker = () => {
         onSelect({ date, formattedDate, datepicker }) {
           if (Array.isArray(date) && date.length > 1) {
             const [sDate, eDate] = date;
-            dispatch(getTrendDatas());
             dispatch(setDates({ startDate: dayjs(sDate), endDate: dayjs(eDate) }));
           }
         },
