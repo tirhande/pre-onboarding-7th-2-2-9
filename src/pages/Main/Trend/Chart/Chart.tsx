@@ -52,7 +52,7 @@ const TrendChart = ({ data }: { data: IFilterData }) => {
       suffix: '원',
     },
   } as IToolTip;
-  const xOffsets = [0, 960];
+  const xOffsets = [10, 960];
   const colors = ['#4fadf7', '#85da47'];
 
   const maxima = Object.keys(data).map(obj => Math.max(...data[obj].map(d => Number(d.y))));
