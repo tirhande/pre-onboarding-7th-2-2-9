@@ -14,7 +14,7 @@ const Card = ({ title, data: { value, variance } }: { title: string; data: DiffT
   }[title];
 
   const TriangleIcon =
-    variance === '0' ? <></> : variance.includes('-') ? <ArrowFillUp /> : <ArrowFillDown />;
+    variance === '0' ? <></> : variance.includes('-') ? <ArrowFillDown /> : <ArrowFillUp />;
 
   return (
     <CardArticle>
