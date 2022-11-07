@@ -27,7 +27,7 @@ export interface ITrendData extends ICommonData {
   conv: number;
 }
 
-interface IMediaData extends ICommonData {
+export interface IMediaData extends ICommonData {
   channel: string;
 }
 
@@ -55,27 +55,18 @@ const initialState: SliceState = {
   },
   mediaDatas: [],
 };
-export const getTrendDatas = createAsyncThunk(
-  'get/trend_data',
-  async ({ startDate, endDate }: IDate, thunkAPI) => {
-    const {
-      data: {
-        report: { daily },
-      },
-    } = await instance.get('/server/wanted_FE_trend-data-set.json');
-    return daily;
-  }
-);
-export const getMediaDatas = createAsyncThunk(
-  'get/media_data',
-  async ({ sDate, eDate }: { sDate: Dayjs; eDate: Dayjs }, thunkAPI) => {
-    const mediaResp = await instance.get('/server/wanted_FE-media-channel-data-set.json');
-    const mediaData = mediaResp.data.filter((obj: IMediaData) =>
-      dayjs(obj.date).isBetween(sDate, eDate, 'day', '[]')
-    );
-    return mediaData;
-  }
-);
+export const getTrendDatas = createAsyncThunk('get/trend_data', async () => {
+  const {
+    data: {
+      report: { daily },
+    },
+  } = await instance.get('/server/wanted_FE_trend-data-set.json');
+  return daily;
+});
+export const getMediaDatas = createAsyncThunk('get/media_data', async () => {
+  const { data } = await instance.get('/server/wanted_FE-media-channel-data-set.json');
+  return data;
+});
 
 export const DashSlice = createSlice({
   name: 'dashboard',

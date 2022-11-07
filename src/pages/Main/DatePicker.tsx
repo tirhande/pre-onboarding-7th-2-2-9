@@ -16,8 +16,6 @@ const RangeDatePicker = () => {
   let dp = useRef<any>(null);
 
   useEffect(() => {
-    dispatch(getTrendDatas({ startDate, endDate }));
-
     if (dateInputRef.current) {
       // 기본 오늘부터 5일전
       // startDate: dayjs(),
@@ -41,12 +39,14 @@ const RangeDatePicker = () => {
         onSelect({ date, formattedDate, datepicker }) {
           if (Array.isArray(date) && date.length > 1) {
             const [sDate, eDate] = date;
-            dispatch(getTrendDatas({ startDate: dayjs(sDate), endDate: dayjs(eDate) }));
+            dispatch(getTrendDatas());
             dispatch(setDates({ startDate: dayjs(sDate), endDate: dayjs(eDate) }));
           }
         },
       });
     }
+
+    dispatch(getTrendDatas());
   }, [dispatch]);
 
   return (

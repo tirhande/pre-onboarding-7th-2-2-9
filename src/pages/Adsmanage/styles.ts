@@ -84,4 +84,8 @@ export const SubHeader = styled.header`
 
   height: 40px;
   margin-bottom: 40px;
+
+  select {
+    font-size: 14px;
+  }
 `;

@@ -1,4 +1,3 @@
-export const getAdItem = () => {};
 export const TenKFormatter = (num: number) => {
   const lookup = [
     { value: 1, symbol: '' },

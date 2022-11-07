@@ -5,32 +5,57 @@ import { IFilterData } from 'utils/mainUtils';
 import {
   VictoryAxis,
   VictoryChart,
-  VictoryGroup,
+  VictoryLabel,
   VictoryLine,
-  VictoryScatter,
   VictoryTooltip,
   VictoryVoronoiContainer,
 } from 'victory';
-interface IToolTip {
-  [key: string]: string;
-  roas: string;
-  cost: string;
-  imp: string;
-  click: string;
-  conv: string;
-  convValue: string;
+
+interface IToolTipItem {
+  name: string;
+  suffix: string;
 }
+interface IToolTip {
+  [key: string]: IToolTipItem;
+  roas: IToolTipItem;
+  cost: IToolTipItem;
+  imp: IToolTipItem;
+  click: IToolTipItem;
+  conv: IToolTipItem;
+  convValue: IToolTipItem;
+}
+
 const TrendChart = ({ data }: { data: IFilterData }) => {
   const selectOption = {
-    roas: 'ROAS',
-    cost: '광고비',
-    imp: '노출 수',
-    click: '클릭 수',
-    conv: '전환 수',
-    convValue: '매출',
+    roas: {
+      name: 'ROAS',
+      suffix: '%',
+    },
+    cost: {
+      name: '광고비',
+      suffix: '원',
+    },
+    imp: {
+      name: '노출 수',
+      suffix: '회',
+    },
+    click: {
+      name: '클릭 수',
+      suffix: '회',
+    },
+    conv: {
+      name: '전환 수',
+      suffix: '회',
+    },
+    convValue: {
+      name: '매출',
+      suffix: '원',
+    },
   } as IToolTip;
-
+  const xOffsets = [0, 960];
   const colors = ['#4fadf7', '#85da47'];
+
+  const maxima = Object.keys(data).map(obj => Math.max(...data[obj].map(d => Number(d.y))));
   return (
     <ChartArticle>
       <VictoryChart
@@ -46,20 +71,9 @@ const TrendChart = ({ data }: { data: IFilterData }) => {
               },
             },
           },
-          // 세로 Axis
-          dependentAxis: {
-            style: {
-              // tickLabels: {fontSize: 15, padding: 5}
-              tickLabels: { fill: '#94a2ad' },
-              axis: { stroke: 'none' },
-              grid: {
-                fill: 'none',
-                stroke: '#edeff1',
-              },
-            },
-          },
         }}
         width={960}
+        domain={{ y: [0, 1] }}
         domainPadding={{ x: 50, y: [50, 20] }}
         padding={{ top: 10, left: 10, bottom: 35, right: 0 }}
         containerComponent={<VictoryVoronoiContainer />}
@@ -67,23 +81,47 @@ const TrendChart = ({ data }: { data: IFilterData }) => {
         {/* 가로 Axis */}
         <VictoryAxis tickFormat={t => `${dayjs(t).format('M월 D일')}`} />
         {/* 세로 Axis */}
-        <VictoryAxis dependentAxis tickCount={6} tickFormat={t => `${ChartFormatter(t)}`} />
-        {Object.keys(data).map((obj, index) => (
-          <VictoryGroup
-            key={index}
-            color={colors[index]}
-            labels={({ datum }) => `${selectOption[obj]}: ${ChartFormatter(datum.y)}`}
+        {Object.keys(data).map((obj, i) => (
+          <VictoryAxis
+            dependentAxis
+            key={i}
+            style={{
+              tickLabels: { fill: colors[i] },
+              axis: { stroke: 'none' },
+              grid: {
+                fill: 'none',
+                stroke: '#edeff1',
+              },
+            }}
+            label={selectOption[obj].suffix}
+            axisLabelComponent={<VictoryLabel dx={i * 55} angle={-360} />}
+            tickValues={[0.25, 0.5, 0.75, 1]}
+            tickFormat={t =>
+              `${
+                obj === 'roas' ? Math.floor((t * maxima[i]) / 100) : ChartFormatter(t * maxima[i])
+              }`
+            }
+            offsetX={xOffsets[i]}
+          />
+        ))}
+        {Object.keys(data).map((obj, i) => (
+          <VictoryLine
+            key={i}
+            style={{ data: { stroke: colors[i] } }}
+            data={data[obj]}
+            y={datum => datum.y / maxima[i]}
+            labels={({ datum }) =>
+              `${selectOption[obj].name}: ${
+                obj === 'roas' ? Math.floor(datum.y / 100) : ChartFormatter(datum.y)
+              }${selectOption[obj].suffix}`
+            }
             labelComponent={
               <VictoryTooltip
                 flyoutPadding={{ left: 20, right: 20, bottom: 5, top: 5 }}
                 style={{ fontSize: 14 }}
               />
             }
-            data={data[obj]}
-          >
-            <VictoryLine />
-            <VictoryScatter size={({ active }) => (active ? 8 : 3)} />
-          </VictoryGroup>
+          />
         ))}
       </VictoryChart>
     </ChartArticle>
